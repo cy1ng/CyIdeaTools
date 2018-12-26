@@ -1,0 +1,31 @@
+<idea-plugin>
+  <version>0.0.1</version>
+  <id>CyIdeaTools</id>
+  <name>Enum Stastic</name>
+  <vendor email="cy70624523@163.com" url="http://blog.lovecying.com">cying</vendor>
+
+  <description><![CDATA[ My First Plugin My First Plugin My First Plugin]]></description>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+  <idea-version since-build="173.0"/>
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+    <toolWindow id="CyIdeaTools"
+                anchor="bottom"
+                canCloseContents="true"
+                factoryClass="com.cying.ideatools.toolwindow.EnumFinderToolWindowFactory"
+                icon="/checkstyle13.png"/>
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="CyIdeaTools.ID" class="com.cying.ideatools.action.EnumFinderAction" text="CyIdeaTools" description="CyIdeaTools">
+      <add-to-group group-id="WindowMenu" anchor="first"/>
+      <!--<keyboard-shortcut keymap="$default" first-keystroke="shift meta F"/>-->
+    </action>
+  </actions>
+</idea-plugin>
