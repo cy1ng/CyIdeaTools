@@ -1,0 +1,21 @@
+<idea-plugin>
+    <version>0.0.1</version>
+    <id>GapsHelper</id>
+    <name>GapsHelper</name>
+    <vendor email="cy70624523@163.com" url="http://blog.lovecying.com">cying</vendor>
+
+    <description><![CDATA[ Useful IDEA plugin tools for gapsV5 platform]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+    <idea-version since-build="173.0"/>
+    <extensions defaultExtensionNs="com.intellij">
+        <fileEditorProvider implementation="com.cying.gapshelper.param.ui.ParamFileEditorProvider"/>
+        <fileTypeFactory implementation="com.cying.gapshelper.param.ParamFileTypeFactory"/>
+    </extensions>
+    <actions>
+    </actions>
+</idea-plugin>
