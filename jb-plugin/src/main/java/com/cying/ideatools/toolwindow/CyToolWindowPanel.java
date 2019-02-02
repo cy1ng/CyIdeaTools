@@ -8,17 +8,17 @@ import java.awt.*;
 
 /**
  * @author chengying13378 chengying13378@hundsun.com
- * @ClassName EnumFinderToolWindow
+ * @ClassName CyToolWindowPanel
  * @Description 工具窗口
  * @date 2018-12-23 17:32
  */
-public class EnumFinderToolWindowPanel extends JPanel {
+public class CyToolWindowPanel extends JPanel {
 
     private final Project project;
 
     private final ToolWindow toolWindow;
 
-    public EnumFinderToolWindowPanel(final ToolWindow toolWindow, final Project project) {
+    public CyToolWindowPanel(final ToolWindow toolWindow, final Project project) {
 
         super(new BorderLayout());
 
