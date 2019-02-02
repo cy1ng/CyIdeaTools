@@ -1,0 +1,129 @@
+########################################################################################
+## ${createDate}
+## ${mapperPackages} mapper package name
+## ${modelPackages} model package name
+## $user username
+## $mail user's email
+## $modelName model's name
+## ${modelNameCamel} model name use camel
+## ${modelKeyType} model key type
+## ${modelKeyCamel} model key name user camel
+########################################################################################
+
+package ${targetPackage};
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import com.github.pagehelper.Page;
+import com.hundsun.core.common.PageRequest;
+import com.hundsun.epay5.common.exception.resouces.EpayDBException;
+import $!{modelPackages}.$!{modelName};
+import $!{mapperPackages}.$!{modelName}Mapper;
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+* @author $!{user} $!{mail}
+* @ClassName $!{modelName}
+* @Description TODO
+* @date $!{createDate}
+*/
+@Component
+public class $!{modelName}ManagerImpl {
+
+private static final Logger LOGGER = LoggerFactory.getLogger($!{modelName}ManagerImpl.class);
+
+    @Autowired
+    private $!{modelName}Mapper $!{modelKeyCamel}Mapper;
+
+    /**
+    * 增加!{modelName}
+    * @param ${modelNameCamel}
+    * @return
+    */
+    @Override
+    public $!{modelName} add$!{modelName}($!{modelName} $!{modelNameCamel}){
+
+        try {
+            $!{modelKeyCamel}Mapper.insertSelective($!{modelNameCamel});
+        } catch (DuplicateKeyException e) {
+            throw new EpayDBException(RespCodeConsts.DB_DUMP_KEY, "主键重复", e);
+        } catch (Exception e) {
+        if (e instanceof SQLIntegrityConstraintViolationException) {
+            throw new EpayDBException(RespCodeConsts.DB_DUMP_KEY, "主键重复", e);
+        }
+            throw new EpayDBException("数据插入异常", e);
+        }
+        return $!{modelNameCamel};
+    }
+
+    /**
+    * 删除${modelName}
+    * @param ${modelKeyCamel}
+    */
+    public void del$!{modelName}($!{modelKeyType} $!{modelKeyCamel}){
+
+        try {
+            $!{modelKeyCamel}Mapper.deleteByPrimaryKey($!{modelKeyCamel});
+        } catch (Exception e) {
+            LOGGER.error("", e);
+            throw new EpayDBException("数据删除操作异常", e);
+        }
+    }
+
+    /**
+    * 根据主键更新${modelName}
+    *
+    * @param ${modelNameCamel}
+    */
+    public int update$!{modelName}($!{modelName} $!{modelNameCamel}){
+
+        try {
+            return $!{modelKeyCamel}Mapper.updateByPrimaryKeySelective($!{modelNameCamel});
+        } catch (Exception e) {
+            LOGGER.error("", e);
+            throw new EpayDBException("数据更新操作异常", e);
+        }
+    }
+
+
+
+    /**
+    * 根据主键查询${modelKeyCamel}
+    *
+    * @param ${modelKeyCamel}
+    */
+    public $!{modelName} get$!{modelName}($!{modelKeyType} $!{modelKeyCamel}){
+
+        try {
+            return $!{modelKeyCamel}Mapper.selectByPrimaryKey($!{modelKeyCamel});
+        } catch (Exception e) {
+            LOGGER.error("", e);
+            throw new EpayDBException("数据查询异常", e);
+        }
+    }
+
+
+    /**
+    * 分页条件查询${modelName}
+    * @param pageRequest
+    * @return
+    */
+    public Page<$!{modelName}> get$!{modelName}sByPage(PageRequest pageRequest){
+
+        PageHelper.startPage(pageRequest.getPageNo(), pageRequest.getPageSize());
+        try {
+            $!{modelName}Criteria criteria = new $!{modelName}Criteria();
+            if (pageRequest.getOrderByColumn() != null) {
+            criteria.setOrderByClause(pageRequest.getOrderByColumn());
+        }
+        Page<$!{modelName}> pageList = (Page<$!{modelName}>) $!{modelKeyCamel}Mapper.selectByExample(criteria);
+            return pageList;
+        } catch (EpayDBException e) {
+            LOGGER.error("", e);
+            throw new EpayDBException("分页查询信息操作异常");
+        }
+    }
+
+}

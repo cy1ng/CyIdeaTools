@@ -1,0 +1,130 @@
+########################################################################################
+##  $!{createDate}
+##  $!{targetPackage}
+##  $!{mapperPackages} mapper package name
+##  $!{modelPackages} model package name
+##  $!{user} username
+##  $!{mail} user's email
+##  $!{modelName} model's name
+##  $!{modelNameCamel} model name use camel
+##  $!{modelKeyType} model key type
+##  $!{modelKeyCamel} model key name user camel
+########################################################################################
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+
+/**
+* @author $!{user} $!{mail}
+* @ClassName $!{modelName}
+* @Description TODO
+* @date $!{createDate}
+*/
+public class $!{modelName}ServiceProviderImpl {
+
+    private static Logger LOGGER = LoggerFactory.getLogger($!{modelName}ServiceProviderImpl.class);
+
+    @Autowired
+    private I$!{modelName}Manager $!{modelNameCamel}Manager;
+
+    /**
+    * 增加$!{modelName}
+    * @param $!{modelName}DTO
+    * @return
+    */
+    CommonResponse add$!{modelName}($!{modelName}DTO $!{modelNameCamel}DTO){
+
+        try {
+            $!{modelName} machine = new $!{modelName}();
+            BeanUtils.copyProperties($!{modelNameCamel}DTO, $!{modelNameCamel});
+            $!{modelNameCamel}Manager.addMachine($!{modelNameCamel});
+        } catch(DBException e){
+            LOGGER.error("",e);
+            if(RespCodeConsts.DB_DUMP_KEY.equals(e.getErrCode())){
+                return CommonResponse.fail("$!{modelName}主键已经存在!");
+            }else{
+                return CommonResponse.fail("添加$!{modelName}异常:" + e.getMessage());
+            }
+        } catch (Exception e) {
+            LOGGER.error("", e);
+            return CommonResponse.fail("添加$!{modelName}异常:" + e.getMessage());
+        }
+            return CommonResponse.success($!{modelNameCamel}DTO);
+    }
+
+    /**
+    * @param $!{modelKeyCamel}
+    */
+    CommonResponse del$!{modelName}($!{modelKeyType} $!{modelKeyCamel}){
+
+        try {
+            $!{modelKeyCamel}Manager.del$!{modelName}($!{modelKeyCamel});
+        } catch (Exception e) {
+            LOGGER.error("", e);
+            return CommonResponse.fail("删除$!{modelName}异常");
+        }
+            return CommonResponse.success();
+    }
+
+    /**
+    * 根据主键更新$!{modelName}
+    * @param $!{modelName}DTO
+    */
+    CommonResponse update$!{modelName}($!{modelName}DTO $!{modelNameCamel}DTO){
+
+        $!{modelName} $!{modelNameCamel} = new $!{modelName}();
+        BeanUtils.copyProperties($!{modelNameCamel}DTO, $!{modelNameCamel});
+        try {
+            $!{modelNameCamel}Manager.update$!{modelName}($!{modelNameCamel});
+        } catch (Exception e) {
+            LOGGER.error("", e);
+            return CommonResponse.fail("$!{modelName}更新异常");
+        }
+        return CommonResponse.success();
+    }
+
+
+    /**
+    * 根据主键查询$!{modelName}
+    * @param termNo
+    */
+    CommonResponse get$!{modelName}($!{modelKeyType} $!{modelKeyCamel}){
+
+        $!{modelName} $!{modelKeyCamel} = null;
+        try {
+            $!{modelKeyCamel} = $!{modelKeyCamel}Manager.get$!{modelName}($!{modelKeyCamel});
+        } catch (Exception e) {
+            LOGGER.error("", e);
+            return CommonResponse.fail("获取$!{modelName}信息异常");
+        }
+        $!{modelName}DTO $!{modelKeyCamel}DTO = new $!{modelName}DTO();
+        BeanUtils.copyProperties($!{modelKeyCamel}, $!{modelKeyCamel}DTO);
+        return CommonResponse.success($!{modelKeyCamel}DTO);
+    }
+
+    /**
+    * 分页查询
+    * @param pageRequest
+    * @return
+    */
+    CommonResponse get$!{modelName}sByPage(PageRequest pageRequest){
+
+        try {
+                Page<$!{modelName}> pageList = $!{modelKeyCamel}Manager.getMachineByPage(pageRequest);
+                PageResponse pageResponse = PageResponseAdapter.transform(pageList, new TypeReference<$!{modelName}DTO>() {
+                });
+                return CommonResponse.success(pageResponse);
+            } catch (Exception e) {
+                LOGGER.error("", e);
+                return CommonResponse.fail("分页获取$!{modelName}信息异常");
+            }
+    }
+
+
+}

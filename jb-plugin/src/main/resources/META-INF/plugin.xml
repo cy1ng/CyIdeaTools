@@ -1,31 +1,53 @@
 <idea-plugin>
-  <version>0.0.1</version>
-  <id>CyIdeaTools</id>
-  <name>Enum Stastic</name>
-  <vendor email="cy70624523@163.com" url="http://blog.lovecying.com">cying</vendor>
+    <version>0.0.1</version>
+    <id>CyIdeaTools</id>
+    <name>CyIdeaTools</name>
+    <vendor email="cy70624523@163.com" url="http://blog.lovecying.com">cying</vendor>
 
-  <description><![CDATA[ My First Plugin My First Plugin My First Plugin]]></description>
+    <description><![CDATA[ Useful IDEA plugin tools for mulit functions and others for crud code maker 。]]></description>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
-  <idea-version since-build="173.0"/>
-  <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
-    <toolWindow id="CyIdeaTools"
-                anchor="bottom"
-                canCloseContents="true"
-                factoryClass="com.cying.ideatools.toolwindow.EnumFinderToolWindowFactory"
-                icon="/checkstyle13.png"/>
-  </extensions>
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+    <idea-version since-build="181.0"/>
+    <depends>com.intellij.modules.java</depends>
+    <!--<depends optional="true">org.intellij.scala</depends>-->
 
-  <actions>
-    <!-- Add your actions here -->
-    <action id="CyIdeaTools.ID" class="com.cying.ideatools.action.EnumFinderAction" text="CyIdeaTools" description="CyIdeaTools">
-      <add-to-group group-id="WindowMenu" anchor="first"/>
-      <!--<keyboard-shortcut keymap="$default" first-keystroke="shift meta F"/>-->
-    </action>
-  </actions>
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- My ToolWindow -->
+        <!--<toolWindow id="CyIdeaTools"-->
+                    <!--anchor="bottom"-->
+                    <!--canCloseContents="true"-->
+                    <!--factoryClass="com.cying.ideatools.toolwindow.CyToolWindowFactory"-->
+                    <!--icon="/cyingtools.png"/>-->
+        <!--<fileEditorProvider implementation="com.cying.ideatools.param.ui.ParamFileEditorProvider"/>-->
+        <!--<fileTypeFactory implementation="com.cying.ideatools.param.ParamFileTypeFactory"/>-->
+        <!-- code maker -->
+        <applicationService serviceInterface="com.cying.ideatools.codemaker.crud.CrudCodeMakerSettings"
+                            serviceImplementation="com.cying.ideatools.codemaker.crud.CrudCodeMakerSettings"/>
+
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <group id="com.cying.ideatools.codemaker.crud.action.CodeMakerMenu" class="com.cying.ideatools.codemaker.crud.action.CodeMakerGroup" text="CrudCodeMaker"
+               description="crud code maker" popup="true">
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="GeneratePattern"/>
+        </group>
+
+        <action id="com.cying.ideatools.codemaker.crud.action.CodeMakerAction" class="com.cying.ideatools.codemaker.crud.action.CodeMakerAction" text="CrudCodeMaker2"
+                description="crud code maker">
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="GeneratePattern"/>
+            <!--<keyboard-shortcut keymap="$default" first-keystroke="shift meta F"/>-->
+        </action>
+    </actions>
+
+    <application-components>
+        <component>
+            <implementation-class>com.cying.ideatools.codemaker.crud.CrudCodeMakerApp</implementation-class>
+        </component>
+    </application-components>
+
 </idea-plugin>

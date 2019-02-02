@@ -1,0 +1,54 @@
+########################################################################################
+##  $!{createDate}
+##  $!{targetPackage}
+##  $!{mapperPackages} mapper package name
+##  $!{modelPackages} model package name
+##  $!{user} username
+##  $!{mail} user's email
+##  $!{modelName} model's name
+##  $!{modelNameCamel} model name use camel
+##  $!{modelKeyType} model key type
+##  $!{modelKeyCamel} model key name user camel
+########################################################################################
+
+
+/**
+* @author $!{user} $!{mail}
+* @ClassName $!{modelName}
+* @Description TODO
+* @date $!{createDate}
+*/
+public interface I$!{modelName}ServiceProvider {
+
+    /**
+    * 增加$!{modelName}
+    * @param $!{modelName}DTO
+    * @return
+    */
+    CommonResponse add$!{modelName}($!{modelName}DTO $!{modelNameCamel}DTO);
+
+    /**
+    * @param $!{modelKeyCamel}
+    */
+    CommonResponse del$!{modelName}($!{modelKeyType} $!{modelKeyCamel});
+
+    /**
+    * 根据主键更新$!{modelName}
+    * @param $!{modelName}DTO
+    */
+    CommonResponse update$!{modelName}($!{modelName}DTO $!{modelNameCamel}DTO);
+
+    /**
+    * 根据主键查询$!{modelName}
+    * @param termNo
+    */
+    CommonResponse get$!{modelName}($!{modelKeyType} $!{modelKeyCamel});
+
+    /**
+    * 分页查询
+    * @param pageRequest
+    * @return
+    */
+    CommonResponse get$!{modelName}sByPage(PageRequest pageRequest);
+
+}

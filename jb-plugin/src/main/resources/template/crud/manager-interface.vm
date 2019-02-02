@@ -1,0 +1,64 @@
+########################################################################################
+##  $!{createDate}
+##  $!{targetPackage}
+##  $!{mapperPackages} mapper package name
+##  $!{modelPackages} model package name
+##  $!{user} username
+##  $!{mail} user's email
+##  $!{modelName} model's name
+##  $!{modelNameCamel} model name use camel
+##  $!{modelKeyType} model key type
+##  $!{modelKeyCamel} model key name user camel
+########################################################################################
+
+package $!{targetPackage};
+
+import com.github.pagehelper.Page;
+import com.hundsun.core.common.PageRequest;
+import $!{modelPackages}.$!{modelName};
+
+/**
+* @author $!{user} $!{mail}
+* @ClassName $!{modelName}
+* @Description TODO
+* @date $!{createDate}
+*/
+public interface I$!{modelName}Manager {
+
+    /**
+    * 增加$!{modelName}
+    * @param $!{modelNameCamel}
+    * @return
+    */
+    $!{modelName} add$!{modelName}($!{modelName} $!{modelNameCamel});
+
+    /**
+    * 删除$!{modelName}
+    * @param $!{modelKeyCamel}
+    */
+    void del$!{modelName}($!{modelKeyType} $!{modelKeyCamel});
+
+    /**
+    * 根据主键更新$!{modelName}
+    *
+    * @param $!{modelNameCamel}
+    */
+    int update$!{modelName}($!{modelName} $!{modelNameCamel});
+
+
+    /**
+    * 根据主键查询$!{modelKeyCamel}
+    *
+    * @param $!{modelKeyCamel}
+    */
+    $!{modelName} get$!{modelName}($!{modelKeyType} $!{modelKeyCamel});
+
+
+    /**
+    * 分页条件查询$!{modelName}
+    * @param pageRequest
+    * @return
+    */
+    Page<$!{modelName}> get$!{modelName}sByPage(PageRequest pageRequest);
+
+}

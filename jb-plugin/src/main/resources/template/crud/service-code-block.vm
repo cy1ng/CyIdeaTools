@@ -1,0 +1,69 @@
+########################################################################################
+## 需要人工指定的代码块生成
+## TODO 动态条件更新,分页的动态条件查询,不分页的动态条件查询,唯一查询(要么一个要么0个)
+## $!{parameters}
+## $!{returnType}
+## $!{methodName}
+## $!{modelName}
+## $!{modelNameCamel}
+## $!{exampleFlag}
+########################################################################################
+#############################
+###self define mapper method
+#############################
+
+
+/**
+* TODO
+#foreach($parameter in $!parameters)
+* @param ${parameter.name}
+#end
+* @return
+*/
+public ${returnType}DTO $!{methodName}(#foreach($parameter in $!parameters) $!{parameter.type} $!{parameter.name}, #end){
+
+    try{
+        //TODO 转DTO
+        return $!{modelNameCamel}Manager.$!{methodName}(#foreach($parameter in $!parameters) $!{parameter.type} $!{parameter.name}, #end);
+    }catch(Exception e){
+        throw new DBException("db error",e);
+    }
+}
+
+#if($!selExampleFlag)
+
+#############################
+###page example mapper method
+#############################
+@Override
+public Page<$!{modelName}DTO> $!{methodName}(#foreach($parameter in $!parameters) $!{parameter.type} $!{parameter.name}, #end) {
+
+    PageHelper.startPage(pageRequest.getPageNo(), pageRequest.getPageSize());
+    $!{modelName}Example example = new $!{modelName}Example();
+    try {
+        Page<$!{modelName}> pageList = (Page<$!{modelName}>) $!{modelNameCamel}Manager.selectByExample(example);
+        //TODO 转DTO
+        return pageList;
+    } catch (Exception e) {
+        throw new DBException("db error",e);
+    }
+}
+#############################
+###uniqe result example mapper method
+#############################
+@Override
+public Page<$!{modelName}DTO> $!{methodName}(#foreach($parameter in $!parameters) $!{parameter.type} $!{parameter.name}, #end) {
+
+    $!{modelName}Example example = new $!{modelName}Example();
+    try {
+        List<$!{modelName}> list = $!{modelNameCamel}Mapper.selectByExample(example);
+        if(list == null || list.size() < 1){
+            return null;
+        }
+        //TODO 转DTO
+        return list.get(0);
+    } catch (Exception e) {
+        throw new DBException("db error",e);
+    }
+}
+#end

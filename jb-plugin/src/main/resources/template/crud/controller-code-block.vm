@@ -1,0 +1,37 @@
+## ######################################################################################
+## 需要人工指定的代码块生成
+## TODO 动态条件更新,分页的动态条件查询,不分页的动态条件查询,唯一查询(要么一个要么0个)
+
+#############################
+###page example mapper method
+#############################
+
+
+#############################
+###uniqe result example mapper method
+#############################
+
+
+#############################
+###self define mapper method
+#############################
+/**
+* TODO
+#foreach($parameter in $!parameters)
+* @param ${parameter.name}
+#end
+* @return
+*/
+@${postGet}Mapping("/$!{methodName}")
+@ResponseBody
+public ${returnType} $!{methodName}(#foreach($parameter in $!parameters) $!{parameter.type} $!{parameter.name}, #end){
+
+    try{
+        ${returnType} respBean = $!{modelNameCamel}Manager.$!{methodName}(#foreach($parameter in $!parameters) $!{parameter.type} $!{parameter.name}, #end);
+        // 包装
+        return CommonResponse.success(respBean);
+    }catch(Exception e){
+        LOGGER.error("", e);
+        return CommonResponse.fail(e.getMessage());
+    }
+}
