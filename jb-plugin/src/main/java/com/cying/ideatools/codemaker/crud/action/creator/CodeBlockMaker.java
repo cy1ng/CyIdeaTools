@@ -4,13 +4,16 @@ import com.cying.ideatools.codemaker.crud.CodeTemplate;
 import com.cying.ideatools.codemaker.crud.CrudCodeMakerSettings;
 import com.cying.ideatools.codemaker.crud.MethodEntry;
 import com.cying.ideatools.codemaker.crud.ui.SelectMethodDlg;
-import com.cying.ideatools.codemaker.crud.ui.ShowCodeBlockDlg;
 import com.cying.ideatools.codemaker.crud.utils.CodeMakerUtil;
 import com.cying.ideatools.codemaker.crud.utils.VelocityUtil;
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.ide.CopyPasteManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiMethod;
+import com.intellij.util.ui.TextTransferable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,11 +69,14 @@ public class CodeBlockMaker implements IMaker {
             }
             // 渲染模板 TODO 注意基本类型不能加DTO哦
             String content = VelocityUtil.evaluate(codeTemplate.getCodeTemplate(), createContext(methodEntry, modelName));
-            allContent.append(content).append("=============================\r\n");
+            allContent.append(content).append("/**=============================**/\r\n");
         }
         // 展示类容
-        ShowCodeBlockDlg showCodeBlockDlg = new ShowCodeBlockDlg(project, allContent, "Copy Created Code");
-        showCodeBlockDlg.show();
+//        ShowCodeBlockDlg showCodeBlockDlg = new ShowCodeBlockDlg(project, allContent, "Copy Created Code");
+//        showCodeBlockDlg.show();
+        CopyPasteManager.getInstance().setContents(new TextTransferable(allContent.toString()));
+        Messages.showMessageDialog(project, "code has been copied to clipboard", "Generate Success", IconLoader.getIcon("/cyingtools.png"));
+
     }
 
     private Map<String, Object> createContext(MethodEntry methodEntry, String modelName) {

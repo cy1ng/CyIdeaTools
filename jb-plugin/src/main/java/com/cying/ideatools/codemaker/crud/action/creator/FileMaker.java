@@ -107,6 +107,7 @@ public class FileMaker implements IMaker {
     private Map<String, Object> createContext(MapperEntry mapperEntry) {
 
         Map<String, Object> context = new HashMap<>(10);
+        context.put("targetPackage",mapperEntry.getMapperPackages());
         context.put("createDate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         context.put("user", mapperEntry.getUser());
         context.put("mail", "cy70624523@163.com");

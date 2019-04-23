@@ -32,15 +32,24 @@
 
     <actions>
         <!-- Add your actions here -->
-        <group id="com.cying.ideatools.codemaker.crud.action.CodeMakerMenu" class="com.cying.ideatools.codemaker.crud.action.CodeMakerGroup" text="CrudCodeMaker"
-               description="crud code maker" popup="true">
-            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="GeneratePattern"/>
-        </group>
+        <!--<group id="com.cying.ideatools.codemaker.crud.action.CodeMakerMenu" class="com.cying.ideatools.codemaker.crud.action.CodeMakerGroup" text="CrudCodeMaker"-->
+               <!--description="crud code maker" popup="true">-->
+            <!--<add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="GeneratePattern"/>-->
+        <!--</group>-->
 
-        <action id="com.cying.ideatools.codemaker.crud.action.CodeMakerAction" class="com.cying.ideatools.codemaker.crud.action.CodeMakerAction" text="CrudCodeMaker2"
-                description="crud code maker">
+<!--        <action id="com.cying.ideatools.codemaker.crud.action.CodeMakerAction" class="com.cying.ideatools.codemaker.crud.action.CodeMakerAction" text="MyCrudCodeMaker"-->
+<!--                description="crud code maker">-->
+<!--            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="GeneratePattern"/>-->
+<!--            &lt;!&ndash;<keyboard-shortcut keymap="$default" first-keystroke="shift meta F"/>&ndash;&gt;-->
+<!--        </action>-->
+
+        <action id="com.cying.ideatools.dtotransformer.action.Excel2dtoAction" class="com.cying.ideatools.dtotransformer.action.Excel2dtoAction" text="Excel2dtoTransformer"
+                description="excel2dto">
             <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="GeneratePattern"/>
-            <!--<keyboard-shortcut keymap="$default" first-keystroke="shift meta F"/>-->
+        </action>
+        <action id="com.cying.ideatools.dtotransformer.action.Dto2excelAction" class="com.cying.ideatools.dtotransformer.action.Dto2excelAction" text="Dto2excelTransformer"
+                description="excel2dto">
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="com.cying.ideatools.dtotransformer.action.Excel2dtoAction"/>
         </action>
     </actions>
 
