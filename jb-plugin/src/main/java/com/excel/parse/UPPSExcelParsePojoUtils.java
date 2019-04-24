@@ -31,9 +31,9 @@ public class UPPSExcelParsePojoUtils {
 //	public static String RESPPOJOPATH = "D://工作空间//01.工作空间//统一支付4.0//BUPPS40//trunk//Documents//D2.Designs//02.接口文档//RespPojo";
 	
 	
-	public static String EXCELPATH = "/Users/chengying/work/hundsun/newepay/design/HUNDSUN银行统一支付平台V4.0-资金通道系统交互-服务接口V0.0.0.1.xlsx";
-	public static String REQPOJOPATH = "/Users/chengying/work/hundsun/newepay/design/req";
-	public static String RESPPOJOPATH = "/Users/chengying/work/hundsun/newepay/design/resp";
+	public static String EXCELPATH = "D://工作空间//01.工作空间//统一支付4.0//BUPPS40//trunk//Documents//D2.Designs//02.接口文档//HUNDSUN银行统一支付平台V4.0-资金通道系统交互-服务接口V0.0.0.1.xlsx";
+	public static String REQPOJOPATH = "D://工作空间//01.工作空间//统一支付4.0//BUPPS40//trunk//Documents//D2.Designs//02.接口文档//兑付//ReqPojo";
+	public static String RESPPOJOPATH = "D://工作空间//01.工作空间//统一支付4.0//BUPPS40//trunk//Documents//D2.Designs//02.接口文档//兑付//RespPojo";
 
 	
 	public static String PACKAGEPATH ="com.hundsun";
@@ -168,6 +168,7 @@ public class UPPSExcelParsePojoUtils {
 
 			List<UPPSPojoField> reqPojoFieldList = null;
 			List<UPPSPojoField> respPojoFieldList = null;
+			List<UPPSPojoStruture> uPPSPojoStrutureList = null;
 			
 			for (int i = startPageNo; i < total; i++) {
 				
@@ -231,6 +232,8 @@ public class UPPSExcelParsePojoUtils {
 							break;
 						}
 						
+						//还需要计算出起始截止对象的行数    结构名字和起始行数、截止行数
+						
 					}
 					
 				}
@@ -243,6 +246,7 @@ public class UPPSExcelParsePojoUtils {
 				reqPojoFieldList = parseExcelToPojo(xssfSheet,reqStartRowNum,reqEndRowNum,transCode,transName,true);
 				respPojoFieldList = parseExcelToPojo(xssfSheet,respStartRowNum,respEndRowNum,transCode,transName,false);
 
+				
 				uPPSPojoStruture.setReqPojoFieldList(reqPojoFieldList);
 				uPPSPojoStruture.setRespPojoFieldList(respPojoFieldList);
 				
@@ -483,8 +487,6 @@ public class UPPSExcelParsePojoUtils {
 					pojoField.setPrecision(precision);
 					pojoField.setCheckClassName(checkClassName);
 					pojoField.setReq(isReq);
-					pojoField.setTransCode(transCode);
-					pojoField.setTransName(transName);
 					pojoField.setDetailDesc(detailDesc);
 					if("M".equalsIgnoreCase(isNotNull)){
 						pojoField.setIsNotNull(true);

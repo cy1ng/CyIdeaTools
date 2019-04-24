@@ -11,6 +11,18 @@ public class UPPSPojoStruture {
 	private List<UPPSPojoField> reqPojoFieldList;
 	
 	private List<UPPSPojoField> respPojoFieldList;
+	
+	private List<UPPSPojoStruture> uPPSPojoStrutureList;
+	
+	//List<JavaBean>  Object<JavaBean> 2种情况
+
+	public List<UPPSPojoStruture> getUPPSPojoStrutureList() {
+		return uPPSPojoStrutureList;
+	}
+
+	public void setUPPSPojoStrutureList(List<UPPSPojoStruture> uPPSPojoStrutureList) {
+		this.uPPSPojoStrutureList = uPPSPojoStrutureList;
+	}
 
 	public String getTransCode() {
 		return transCode;
@@ -52,4 +64,25 @@ public class UPPSPojoStruture {
 		this.respPojoFieldList = respPojoFieldList;
 	}
 
+	public String toString(){
+		return "transName = ["+transName+"] transCode = ["+transCode+"]"+"\n ReqPojo = \n" +printPojoFieldList(reqPojoFieldList) +"\n RespPojo = \n" +printPojoFieldList(respPojoFieldList);
+	}
+	
+	public String printPojoFieldList(List<UPPSPojoField> uPPSPojoFieldList){
+		
+		if(null == uPPSPojoFieldList){
+			return "{\n};";
+		}else{
+			String str ="{\n";
+			for(UPPSPojoField uPPSPojoField:uPPSPojoFieldList){
+				str += uPPSPojoField.toString()+"\n";
+			}
+			str += "\n};";
+			return str;
+			
+		}
+		
+	}
+	
+	
 }

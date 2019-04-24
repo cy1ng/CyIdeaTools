@@ -76,7 +76,7 @@ public class UPPSPojoCommonStr {
 		}else{
 			reqOrRespStr = "Resp";
 		}
-		return "\n@Data\n"
+		return "@Data\n"
 			  +"public class "+reqOrRespStr+transCode+" implements Serializable {\n\n";
 	}
 	
@@ -120,7 +120,7 @@ public class UPPSPojoCommonStr {
 				typeStr = "String";
 				
 				if(!StringUtils.isBlank(fieldLength)){
-					fieldStr += "    @Length(max = "+fieldLength+", message = \""+desc+"\")\n";
+					fieldStr += "    @Length(max = "+fieldLength+" message = \""+desc+"\")\n";
 				}else{
 					//donothing
 				}

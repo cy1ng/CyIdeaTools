@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.4.1'
+    id 'org.jetbrains.intellij' version '0.4.7'
 }
 
 apply from: "gradle.properties"
@@ -11,7 +11,7 @@ publishPlugin {
 
 
 group 'com.cying'
-version '1.1-SNAPSHOT'
+version '1.2-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -23,13 +23,18 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.14'
     compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    compile group: 'org.apache.poi', name: 'poi', version: '3.11'
+//    compile(group: 'org.apache.poi', name: 'poi-ooxml', version: '3.11')
+    compile("org.apache.poi:poi-ooxml:3.11") {
+        exclude module: 'stax-api'
+    }
 }
 
 intellij {
-    version '2018.3.2'
+    version '191.6183.87'
     pluginName 'CyIdeaTools'
     updateSinceUntilBuild false //Disables updating since-build attribute in plugin.xml
 }
 patchPluginXml {
-    changeNotes "(1)修复一些bug <br>(2)增加代码生成模板<br>(3)调整代码结构<br>(4)更换方法选取UI"
+    changeNotes "(1)整理代码结构 <br>(2)调整UI <br>"
 }

@@ -2,19 +2,17 @@ package com.pojo.format;
 
 public class UPPSPojoField {
 
-	String transCode;
-	String transName;
-	String name;
-	String type;
-	String length;
-	String precision;//精度
-	Boolean isNotNull;
-	String modelName;
-	String upperNode;
-	String desc;
-	String detailDesc;
-	String checkClassName;
-	boolean isReq = false;//请求报文还是应答报文
+	private String name;
+	private String type;
+	private String length;
+	private String precision;//精度
+	private Boolean isNotNull;
+	private String modelName;
+	private String upperNode;
+	private String desc;
+	private String detailDesc;
+	private String checkClassName;
+	private boolean isReq = false;//请求报文还是应答报文
 	
 	public String getLength() {
 		return length;
@@ -64,28 +62,12 @@ public class UPPSPojoField {
 		this.checkClassName = checkClassName;
 	}
 	
-	public String getTransName() {
-		return transName;
-	}
-
-	public void setTransName(String transName) {
-		this.transName = transName;
-	}
-
 	public boolean isReq() {
 		return isReq;
 	}
 
 	public void setReq(boolean isReq) {
 		this.isReq = isReq;
-	}
-
-	public String getTransCode() {
-		return transCode;
-	}
-
-	public void setTransCode(String transCode) {
-		this.transCode = transCode;
 	}
 
 	public String getName() {
@@ -122,7 +104,7 @@ public class UPPSPojoField {
 
 	public String toString() {
 
-		return "transCode = [" + transCode + "] transName = ["+transName+"] name = [" + name + "] type = [" + type + "] desc = [" + desc
-				+ "] detailDesc = [" + detailDesc + "]";
+		return "name = [" + name + "] type = [" + type + "] length=["+length+"] precision = ["+precision+"] desc = [" + desc
+				+ "] detailDesc = [" + detailDesc + "] checkClassName = [" +checkClassName+ "] isNotNull = ["+isNotNull+"] isReq = ["+isReq+"]";
 	}
 }
