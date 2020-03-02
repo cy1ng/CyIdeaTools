@@ -15,6 +15,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.pojo.format.UPPSPojoStruture;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,6 +23,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -59,11 +61,15 @@ public class Dto2excelAction extends AnAction implements DumbAware {
         targetExcel.mkdirs();
         try (InputStream in = getClass().getResourceAsStream(templatePath)) {
             pojoList = JavaFileToStruture.createPojoList(directoryPath);
+            // TODO 使用JavaParser
+            Collections.sort(pojoList);
             XSSFWorkbook fromBook = new XSSFWorkbook(in);
             UPPSPojoParseExcelUtils.createPojoExcel(pojoList, fromBook, toExcelPath);
         } catch (Exception e) {
             e.printStackTrace();
-            ApplicationManager.getApplication().invokeLater(() -> Messages.showMessageDialog(e.getMessage(), "Generate Failed", null));
+            String msg = StringUtils.isBlank(e.getMessage()) ? "空指针异常" : e.getMessage();
+            ApplicationManager.getApplication().invokeLater(() -> Messages.showMessageDialog(msg, "Generate Failed", null));
+            return;
         }
         ApplicationManager.getApplication().invokeLater(() -> Messages.showMessageDialog("API Excel生成路径:" + toExcelPath, "Generate Success", null));
 

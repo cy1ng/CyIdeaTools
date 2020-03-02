@@ -13,20 +13,29 @@
     -->
     <idea-version since-build="181.0"/>
     <depends>com.intellij.modules.java</depends>
-    <!--<depends optional="true">org.intellij.scala</depends>-->
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+           on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.vcs</depends>
+    <depends>com.intellij.modules.xml</depends>
+    <depends>com.intellij.modules.xdebugger</depends>
+    <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- My ToolWindow -->
-        <!--<toolWindow id="CyIdeaTools"-->
-                    <!--anchor="bottom"-->
-                    <!--canCloseContents="true"-->
-                    <!--factoryClass="com.cying.ideatools.toolwindow.CyToolWindowFactory"-->
-                    <!--icon="/cyingtools.png"/>-->
+        <toolWindow id="GapsViewer"
+                    anchor="right"
+                    canCloseContents="false"
+                    factoryClass="com.cying.ideatools.gaps.toolwindow.GapsToolWindowFactory"
+                    icon="/cyingtools.png"/>
         <!--<fileEditorProvider implementation="com.cying.ideatools.param.ui.ParamFileEditorProvider"/>-->
         <!--<fileTypeFactory implementation="com.cying.ideatools.param.ParamFileTypeFactory"/>-->
         <!-- code maker -->
         <applicationService serviceInterface="com.cying.ideatools.codemaker.crud.CrudCodeMakerSettings"
                             serviceImplementation="com.cying.ideatools.codemaker.crud.CrudCodeMakerSettings"/>
+
+        <codeInsight.lineMarkerProvider language="JAVA" implementationClass="com.cying.ideatools.gaps.model.FlowInvokeLineMarker"/>
 
     </extensions>
 
@@ -50,6 +59,10 @@
         <action id="com.cying.ideatools.dtotransformer.action.Dto2excelAction" class="com.cying.ideatools.dtotransformer.action.Dto2excelAction" text="Dto2excelTransformer"
                 description="excel2dto">
             <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="com.cying.ideatools.dtotransformer.action.Excel2dtoAction"/>
+        </action>
+        <action id="com.cying.ideatools.dtotransformer.action.CreateMicroComponentAction" class="com.cying.ideatools.dtotransformer.action.CreateMicroComponentAction" text="CreateGapsMicroComponent"
+                description="CreateGapsMicroComponent">
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="com.cying.ideatools.dtotransformer.action.Dto2excelAction"/>
         </action>
     </actions>
 

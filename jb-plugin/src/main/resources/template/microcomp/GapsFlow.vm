@@ -1,0 +1,130 @@
+##<definitions fileDes="">
+##    <process id="flow_pay_PA0018" name="对账获取业务流水" group="pay-impl" groupDes="实现" version="1.0.0.0" microService="false" applicationId="" isConnected="true">
+##        <startEvent id="36175d6f4b6649829c1418003968f467" name="开始" insular="false" componentId="START">
+##            <guides value="" type="default">
+##                <details>
+##                    <guide nextNode="248f6108ba0e4f31b7a43f0872851cc1" flag="default" des=""/>
+##                </details>
+##            </guides>
+##        </startEvent>
+##        <endEvent id="endEvent" name="结束" insular="false"/>
+##        <ioSpace>
+##            <input name="bupps.req" request="false"/>
+##            <output name="bupps.resp" request="false"/>
+##        </ioSpace>
+##        <serviceTask id="248f6108ba0e4f31b7a43f0872851cc1" name="获取对账业务流水" insular="false" componentId="d994a40d5a6044358edcf9766ede8b8d" nodeDescribe="对账数据获取&#xd;&#xa;@param request&#xd;&#xa;@return&#xd;&#xa;">
+##            <guides value="" type="default">
+##                <details>
+##                    <guide nextNode="endEvent" flag="default" des=""/>
+##                </details>
+##            </guides>
+##            <input name="request" title="" describe="" request="false" className="com.hundsun.iibs.msg.pojo.Request">
+##            <value type="NODE">bupps.req</value>
+##            </input>
+##            <result describe="" request="true">
+##                <value type="STATIC">bupps.resp</value>
+##            </result>
+##        </serviceTask>
+##    </process>
+##    <canvas>
+##        <nodeUIModels>
+##            <nodeUI nodeId="36175d6f4b6649829c1418003968f467" id="8f8522dee3ba487c82ff4da6f67c2cfb" figureType="Terminator">
+##                <point x="75" y="10"/>
+##                <dimension>
+##                    <width>50</width>
+##                    <height>50</height>
+##                </dimension>
+##            </nodeUI>
+##            <nodeUI nodeId="endEvent" id="20bcb31cf3dd4937bba2cbd8306a0107" figureType="Terminator">
+##                <point x="75" y="150"/>
+##                <dimension>
+##                    <width>50</width>
+##                    <height>50</height>
+##                </dimension>
+##            </nodeUI>
+##            <nodeUI nodeId="248f6108ba0e4f31b7a43f0872851cc1" id="1f4c69cda6c54ad7baf76a340bb3a343" figureType="Rectangles">
+##                <point x="40" y="80"/>
+##                <dimension>
+##                    <width>120</width>
+##                    <height>40</height>
+##                </dimension>
+##            </nodeUI>
+##        </nodeUIModels>
+##        <edgeUIModels>
+##            <edgeUI lineId="b15e7c6c9f574dbe853f9818649597ef" sourceId="36175d6f4b6649829c1418003968f467" targetId="248f6108ba0e4f31b7a43f0872851cc1" isAutomatic="true">
+##                <startPoint x="100" y="60"/>
+##                <endPoint x="100" y="80"/>
+##            </edgeUI>
+##            <edgeUI lineId="2c3051837ad748c884d1df37c0ab1060" sourceId="248f6108ba0e4f31b7a43f0872851cc1" targetId="endEvent" isAutomatic="true">
+##                <startPoint x="100" y="120"/>
+##                <endPoint x="100" y="150"/>
+##            </edgeUI>
+##        </edgeUIModels>
+##    </canvas>
+##</definitions>
+<definitions fileDes="">
+    <process id="$!{flowId}" name="$!{flowName}" group="$!{groupId}" groupDes="$!{groupDes}" version="1.0.0.0" microService="false" applicationId="" isConnected="true">
+        <startEvent id="36175d6f4b6649829c1418003968f467" name="开始" insular="false" componentId="START">
+            <guides value="" type="default">
+                <details>
+                    <guide nextNode="248f6108ba0e4f31b7a43f0872851cc1" flag="default" des=""/>
+                </details>
+            </guides>
+        </startEvent>
+        <endEvent id="endEvent" name="结束" insular="false"/>
+        <ioSpace>
+            <input name="bupps.req" request="false"/>
+            <output name="bupps.resp" request="false"/>
+        </ioSpace>
+        <serviceTask id="248f6108ba0e4f31b7a43f0872851cc1" name="$!{microCompDes}" insular="false" componentId="$!{compUnqId}" nodeDescribe="$!{compDescription}">
+            <guides value="" type="default">
+                <details>
+                    <guide nextNode="endEvent" flag="default" des=""/>
+                </details>
+            </guides>
+            #foreach( $reqParam in $reqParamList)
+                <input name="$!{reqParam.reqParamName}" title="" describe="" request="false" className="$!{reqParam.reqClassName}">
+                    <value type="NODE">bupps.req</value>
+                </input>
+            #end
+            <result describe="" request="true">
+                <value type="STATIC">bupps.resp</value>
+            </result>
+        </serviceTask>
+    </process>
+    <canvas>
+        <nodeUIModels>
+            <nodeUI nodeId="36175d6f4b6649829c1418003968f467" id="8f8522dee3ba487c82ff4da6f67c2cfb" figureType="Terminator">
+                <point x="75" y="10"/>
+                <dimension>
+                    <width>50</width>
+                    <height>50</height>
+                </dimension>
+            </nodeUI>
+            <nodeUI nodeId="endEvent" id="20bcb31cf3dd4937bba2cbd8306a0107" figureType="Terminator">
+                <point x="75" y="150"/>
+                <dimension>
+                    <width>50</width>
+                    <height>50</height>
+                </dimension>
+            </nodeUI>
+            <nodeUI nodeId="248f6108ba0e4f31b7a43f0872851cc1" id="1f4c69cda6c54ad7baf76a340bb3a343" figureType="Rectangles">
+                <point x="40" y="80"/>
+                <dimension>
+                    <width>120</width>
+                    <height>40</height>
+                </dimension>
+            </nodeUI>
+        </nodeUIModels>
+        <edgeUIModels>
+            <edgeUI lineId="b15e7c6c9f574dbe853f9818649597ef" sourceId="36175d6f4b6649829c1418003968f467" targetId="248f6108ba0e4f31b7a43f0872851cc1" isAutomatic="true">
+                <startPoint x="100" y="60"/>
+                <endPoint x="100" y="80"/>
+            </edgeUI>
+            <edgeUI lineId="2c3051837ad748c884d1df37c0ab1060" sourceId="248f6108ba0e4f31b7a43f0872851cc1" targetId="endEvent" isAutomatic="true">
+                <startPoint x="100" y="120"/>
+                <endPoint x="100" y="150"/>
+            </edgeUI>
+        </edgeUIModels>
+    </canvas>
+</definitions>

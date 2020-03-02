@@ -50,7 +50,9 @@ public class JavaFileToStruture {
 
             String transCode = respPojoFields.getTransCode();
             UPPSPojoStruture reqPojo = getFromList(reqList, transCode);
-            reqPojo.setRespPojoFieldList(respPojoFields.getRespPojoFieldList());
+            if(reqPojo != null){
+                reqPojo.setRespPojoFieldList(respPojoFields.getRespPojoFieldList());
+            }
         }
 
         for (UPPSPojoStruture beanPojoFields : beanList) {

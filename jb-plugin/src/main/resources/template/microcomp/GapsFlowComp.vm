@@ -1,0 +1,37 @@
+##<componentDefines fileDes="批量贷记记账（批量转单笔）">
+##    <componentDefine id="f7cf9b58749e4f669a200d0dd3e20ab3" name="批量贷记记账（批量转单笔）" group="" using="true" description="批量贷记记账（批量转单笔）&#xd;&#xa;@param request Request&lt;ReqPA0016&gt;&#xd;&#xa;@return Response&lt;RespPA0016&gt;&#xd;&#xa;">
+##        <componentMicroService applicationId="" serviceId="" version="">
+##            <enable>true</enable>
+##        </componentMicroService>
+##        <operations>
+##            <inputExecute order="1">
+##                <input name="request" title="" describe="" request="false" className="com.hundsun.iibs.msg.pojo.Request"/>
+##            </inputExecute>
+##            <outputExecute order="3" argsOrder="2">
+##                <output name="" title="" describe="" request="true" className="com.hundsun.iibs.msg.pojo.Response"/>
+##            </outputExecute>
+##            <methodExecute order="2" argsOrder="1" methodName="batchCreditAcct" className="com.hundsun.bupps.pay.interfaces.provider.IBatchCreditAcctProvider"/>
+##        </operations>
+##        <exceptions/>
+##    </componentDefine>
+##</componentDefines>
+<componentDefines fileDes="$!{fileDes}">
+    <componentDefine id="${componentUnqId}" name="$!{fileDes}" group="" using="true" description="$!{description}">
+        <componentMicroService applicationId="" serviceId="" version="">
+            <enable>true</enable>
+        </componentMicroService>
+        <operations>
+            #foreach( $reqParam in $reqParamList)
+            #set($index = ${velocityCount})
+            <inputExecute order="${index}">
+                <input name="$!{reqParam.reqParamName}" title="" describe="" request="false" className="$!{reqParam.reqClassName}"/>
+            </inputExecute>
+            #end
+            <outputExecute order="3" argsOrder="2">
+                <output name="" title="" describe="" request="true" className="$!{respClassName}"/>
+            </outputExecute>
+            <methodExecute order="2" argsOrder="1" methodName="$!{compMethodName}" className="$!{compClassName}"/>
+        </operations>
+        <exceptions/>
+    </componentDefine>
+</componentDefines>
